@@ -36,10 +36,24 @@ $(document).ready(function(){
 
                 $('.pokemodal').click(function(e){
                   e.preventDefault();
-                  alert('levantar modal');
+                  let new_url = ($(this).attr('url'));
+                  $('#url-pokemon-modal').html(new_url);
+                  $.ajax({
+                    url: new_url,
+                    context: document.body,
+                    method: 'GET',
+                    beforeSend: function(){
+                      $('.erase-before-send').empty()
+                    },
+                    success: function(response){ 
+                      response.abilities.forEach(function(abi){ 
+                        $("#abilityPokemon").append("<p class='list-ability'>"+abi.ability.name.charAt(0).toUpperCase()+abi.ability.name.substr(1).toLowerCase()+"</p>")
+                        })
+                    }
+                  });
+                  $('#myModal').modal('show');
                 });
             }
-
         })
         console.log(respuesta)
     }
