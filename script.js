@@ -36,7 +36,7 @@ $(document).ready(function(){
 
                 $('.pokemodal').click(function(e){
                   e.preventDefault();
-                  alert('levantar modal');
+                  $('#myModal').modal('show')
                 });
             }
 
