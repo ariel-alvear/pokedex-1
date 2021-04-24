@@ -12,7 +12,7 @@ $(document).ready(function(){
                 var n = 1
                 respuesta = response
                 response.results.forEach(function(info){
-                    let details = `<div class='container col-md-4'>
+                    let details = `<div class='container col-md-4 pokemon'>
                     <div class="card mb-5 mt-5 pt-5 pb-5" style="width: 18rem;">
                     <div class="card-body">
                       <h1 class="card-title">${info.name}</h1>
@@ -23,12 +23,23 @@ $(document).ready(function(){
                   $('#info').append(details);
                   n = n + 1;
                 })
-                let nextAdress = `<a href="${response.next}">Ver los otros pokemones</a>` 
+                next_url = response.next
+                let nextAdress = `<a id='pokeparagraph' href="${response.next}">Ver los otros pokemones</a>` 
                 $('#next-button').append(nextAdress)
                 console.log(nextAdress)
             }
         })
         console.log(respuesta)
     }
+    var next_url 
      requestApi('https://pokeapi.co/api/v2/pokemon/');
-})    
+
+    function activeButton (){
+        $('#btn').click(function(e){
+            $('#info').empty('.pokemon')
+            $('#pokeparagraph').remove()
+            requestApi(next_url)             
+        });
+    };
+    activeButton()
+});    
