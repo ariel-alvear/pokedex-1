@@ -37,7 +37,6 @@ $(document).ready(function(){
                 $('.pokemodal').click(function(e){
                   e.preventDefault();
                   let new_url = ($(this).attr('url'));
-                  $('#url-pokemon-modal').html(new_url);
                   $.ajax({
                     url: new_url,
                     context: document.body,
@@ -46,6 +45,7 @@ $(document).ready(function(){
                       $('.erase-before-send').empty()
                     },
                     success: function(response){ 
+                      $('#url-pokemon-modal').html((response.species.name.charAt(0).toUpperCase() + response.species.name.substr(1).toLowerCase()));
                       response.abilities.forEach(function(abi){ 
                         $("#abilityPokemon").append("<p class='list-ability'>"+abi.ability.name.charAt(0).toUpperCase()+abi.ability.name.substr(1).toLowerCase()+"</p>")
                         })
