@@ -14,6 +14,7 @@ $(document).ready(function(){
                 response.results.forEach(function(info){
                     let details = `<div class='container col-md-4 pokemon'>
                     <div class="card mb-5 mt-5 pt-5 pb-5" style="width: 18rem;">
+                    <img id='image-${n}' src="">
                     <div class="card-body">
                       <h1 class="card-title">${info.name}</h1>
                       <a id='enlace-${n}' href="#" url="${info.url}" class="btn btn-primary pokemodal">¡Quiero ver más de este pokémon!</a>
@@ -21,6 +22,7 @@ $(document).ready(function(){
                   </div>
                   </div>`
                   $('#info').append(details);
+                  charge_imagen(`${info.url}`, n)
                   n = n + 1;
                 })
                 next_url = response.next
@@ -76,8 +78,6 @@ $(document).ready(function(){
     var next_url
     requestApi('https://pokeapi.co/api/v2/pokemon/');
 
-
-
     function activeButton (){
         $('#btn').click(function(){
             $('#info').empty('.pokemon')
@@ -91,4 +91,17 @@ $(document).ready(function(){
         });
     };
     activeButton()
+
+    function charge_imagen(url_address , num_index){
+      var i;
+      $.ajax({
+        url: url_address,
+        context: document.body,
+        method: 'GET',
+        success: function(response){
+          let imagen_url = response.sprites.front_default
+          $(`#image-${num_index}`).attr("src", imagen_url);
+        },
+      })
+    }
 });
