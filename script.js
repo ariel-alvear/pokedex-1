@@ -44,7 +44,11 @@ $(document).ready(function(){
                     beforeSend: function(){
                       $('.erase-before-send').empty()
                     },
-                    success: function(response){ 
+                    success: function(response){
+                      var pokeImage = response.sprites.front_default
+                      var pokeImageBack = response.sprites.back_default
+                      $("#pokeImage").attr("src", pokeImage);
+                      $("#pokeImageBack").attr("src", pokeImageBack);
                       $('#url-pokemon-modal').html((response.species.name.charAt(0).toUpperCase() + response.species.name.substr(1).toLowerCase()));
                       response.abilities.forEach(function(abi){ 
                         $("#abilityPokemon").append("<p class='list-ability'>"+abi.ability.name.charAt(0).toUpperCase()+abi.ability.name.substr(1).toLowerCase()+"</p>")
