@@ -7,7 +7,9 @@ $(document).ready(function(){
             url: 'https://pokeapi.co/api/v2/pokemon/',
             context: document.body,
             method: 'GET',
-            success: function(response){ 
-                console.log(response)
-                }
+            success: function(response){
+                console.log(response);
+            }
         })
+    }
+});
