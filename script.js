@@ -48,7 +48,18 @@ $(document).ready(function(){
                       $('#url-pokemon-modal').html((response.species.name.charAt(0).toUpperCase() + response.species.name.substr(1).toLowerCase()));
                       response.abilities.forEach(function(abi){ 
                         $("#abilityPokemon").append("<p class='list-ability'>"+abi.ability.name.charAt(0).toUpperCase()+abi.ability.name.substr(1).toLowerCase()+"</p>")
-                        })
+                      });
+                      response.types.forEach(function(tipo){
+                        $("#typePokemon").append("<p>"+tipo.type.name.charAt(0).toUpperCase()+tipo.type.name.substr(1).toLowerCase()+"</p>")
+                      });
+                      response.moves.forEach(function(move, index){
+                        if (index < 5) {
+                            $("#movePokemon").append("<p>"+move.move.name.charAt(0).toUpperCase()+move.move.name.substr(1).toLowerCase()+"</p>")
+                        }
+                      });
+                      response.game_indices.forEach(function(index){
+                        $("#generationPokemon").append("<p>"+index.version.name.charAt(0).toUpperCase()+index.version.name.substr(1).toLowerCase()+"</p>")
+                      });
                     }
                   });
                   $('#myModal').modal('show');
